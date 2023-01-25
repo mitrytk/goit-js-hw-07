@@ -6,7 +6,6 @@ const galleryListEl = document.querySelector('.gallery');
 galleryItems.map( item => isMakeItem(item));
 galleryListEl.append(...markup);
 galleryListEl.addEventListener("click", onImgClick);
-console.log(galleryListEl);
 
 function isMakeItem({preview, original, description}) {
     const divGalleryItemEl = document.createElement('div');
@@ -14,7 +13,7 @@ function isMakeItem({preview, original, description}) {
 
     const aGalleryLinkEl = document.createElement('a');
     aGalleryLinkEl.classList.add('gallery__link');
-    // aGalleryLinkEl.href = original;
+    aGalleryLinkEl.href = original;
     divGalleryItemEl.append(aGalleryLinkEl);
 
     const imgGalleryEl = document.createElement('img');
@@ -29,12 +28,11 @@ function isMakeItem({preview, original, description}) {
 
 function onImgClick(evt) {
     const isImgEl = evt.target.classList.contains("gallery__image");
-    console.log(isImgEl);
     if (!isImgEl) {
         return;
     };
+    evt.preventDefault();
     const imgSrc = evt.target.dataset.source;
-    console.log(imgSrc);
     const instance = basicLightbox.create(`
     <img src= ${imgSrc} >
     `);
